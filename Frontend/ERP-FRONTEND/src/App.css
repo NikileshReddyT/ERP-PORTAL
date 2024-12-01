@@ -1,0 +1,77 @@
+/* Import Ant Design styles */
+@import 'antd/dist/reset.css';
+
+/* Custom styles */
+.app-container {
+  min-height: 100vh;
+}
+
+.site-layout {
+  padding: 24px;
+  min-height: 360px;
+}
+
+.site-layout-background {
+  background: #fff;
+  padding: 24px;
+  min-height: 360px;
+}
+
+.logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.header-menu {
+  line-height: 64px;
+}
+
+.sider-menu {
+  height: 100%;
+  border-right: 0;
+}
+
+.ant-layout-header {
+  padding: 0;
+  background: #fff;
+}
+
+.ant-layout-content {
+  margin: 24px 16px;
+  padding: 24px;
+  background: #fff;
+  min-height: 280px;
+}
+
+/* Dashboard cards */
+.dashboard-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+}
+
+.dashboard-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.stat-card {
+  text-align: center;
+  padding: 20px;
+}
+
+.stat-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .site-layout {
+    padding: 12px;
+  }
+
+  .ant-layout-content {
+    margin: 12px 8px;
+    padding: 12px;
+  }
+}
