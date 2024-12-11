@@ -14,11 +14,11 @@ const FacultyList = () => {
   }, [dispatch]);
 
   const handleAddFaculty = () => {
-    navigate('/register', { 
-      state: { 
+    navigate('/register', {
+      state: {
         preselectedRole: 'faculty',
-        isAdminCreating: true 
-      } 
+        isAdminCreating: true
+      }
     });
   };
 

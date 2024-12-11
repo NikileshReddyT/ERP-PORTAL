@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   UserGroupIcon,
   PlusIcon,
@@ -9,12 +10,21 @@ import {
 
 const Students = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
   
   const students = [
     { id: 1, name: 'John Doe', department: 'Computer Science', email: 'john.doe@example.com', status: 'Active' },
     { id: 2, name: 'Jane Smith', department: 'Mathematics', email: 'jane.smith@example.com', status: 'Active' },
     { id: 3, name: 'Mike Johnson', department: 'Physics', email: 'mike.johnson@example.com', status: 'Inactive' },
   ];
+
+  const handleAddStudent = () => {
+    navigate('/register', { 
+      state: { 
+        role: 'STUDENT'
+      } 
+    });
+  };
 
   return (
     <div className="h-full">
@@ -27,7 +37,10 @@ const Students = () => {
             </div>
             <h1 className="text-2xl font-semibold text-white">Student Management</h1>
           </div>
-          <button className="flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl transition-all duration-200 shadow-lg shadow-blue-500/20">
+          <button 
+            onClick={handleAddStudent}
+            className="flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl transition-all duration-200 shadow-lg shadow-blue-500/20"
+          >
             <PlusIcon className="h-5 w-5 mr-2" />
             Add Student
           </button>
@@ -49,63 +62,58 @@ const Students = () => {
 
         {/* Students List */}
         <div className="bg-slate-800/50 backdrop-blur-xl rounded-xl border border-slate-700/50 overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-slate-700/50">
-              <thead className="bg-slate-700/30">
-                <tr>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
-                    Name
-                  </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
-                    Department
-                  </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
-                    Email
-                  </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-slate-300 uppercase tracking-wider">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-700/50 bg-slate-800/30">
-                {students.map((student) => (
-                  <tr key={student.id} className="hover:bg-slate-700/30 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-white">{student.name}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-slate-300">{student.department}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-slate-300">{student.email}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        student.status === 'Active' 
-                          ? 'bg-green-500/10 text-green-400' 
-                          : 'bg-red-500/10 text-red-400'
+          <table className="min-w-full divide-y divide-slate-700/50">
+            <thead className="bg-slate-700/30">
+              <tr>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
+                  Name
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
+                  Department
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
+                  Email
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">
+                  Status
+                </th>
+                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-slate-300 uppercase tracking-wider">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-700/50 bg-slate-800/30">
+              {students.map((student) => (
+                <tr key={student.id} className="hover:bg-slate-700/30 transition-colors">
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm font-medium text-white">{student.name}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-slate-300">{student.department}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-slate-300">{student.email}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${student.status === 'Active' 
+                        ? 'bg-green-500/10 text-green-400' 
+                        : 'bg-red-500/10 text-red-400'
                       }`}>
-                        {student.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <div className="flex justify-end space-x-2">
-                        <button className="p-1 text-blue-400 hover:text-blue-300 transition-colors">
-                          <PencilIcon className="h-5 w-5" />
-                        </button>
-                        <button className="p-1 text-red-400 hover:text-red-300 transition-colors">
-                          <TrashIcon className="h-5 w-5" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                      {student.status}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <button className="text-indigo-400 hover:text-indigo-300 mr-3">
+                      <PencilIcon className="h-5 w-5" />
+                    </button>
+                    <button className="text-red-400 hover:text-red-300">
+                      <TrashIcon className="h-5 w-5" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

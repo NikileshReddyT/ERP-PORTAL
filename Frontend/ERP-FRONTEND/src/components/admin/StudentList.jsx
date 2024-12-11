@@ -14,11 +14,11 @@ const StudentList = () => {
   }, [dispatch]);
 
   const handleAddStudent = () => {
-    navigate('/register', { 
-      state: { 
+    navigate('/register', {
+      state: {
         preselectedRole: 'student',
-        isAdminCreating: true 
-      } 
+        isAdminCreating: true
+      }
     });
   };
 
